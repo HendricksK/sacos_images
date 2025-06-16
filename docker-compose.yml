@@ -1,0 +1,19 @@
+version: '3.8'
+
+# Services
+services:
+    nginx:
+        build: 
+            dockerfile: ./deployment/local/nginx/nginx.dockerfile
+        container_name: sacos-nginx-images 
+        ports:
+            - 8181:80
+        volumes:
+            - './deployment/local/nginx/conf.d:/etc/nginx/conf.d'
+            - './logs/nginx/:/var/log/nginx'
+            - './:/var/www/html/images'
+        networks: 
+            - backend        
+networks:
+    backend:
+        driver: bridge
